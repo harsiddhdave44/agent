@@ -52,7 +52,7 @@ func convertKafkaAuthConfig(kafkaCfg *scrapeconfig.KafkaTargetConfig) kafka.Kafk
 		SASLConfig: kafka.KafkaSASLConfig{
 			Mechanism: string(kafkaCfg.Authentication.SASLConfig.Mechanism),
 			User:      kafkaCfg.Authentication.SASLConfig.User,
-			Password:  kafkaCfg.Authentication.SASLConfig.Password.String(),
+			Password:  rivertypes.Secret(kafkaCfg.Authentication.SASLConfig.Password.String()),
 			UseTLS:    kafkaCfg.Authentication.SASLConfig.UseTLS,
 			TLSConfig: *prometheusconvert.ToTLSConfig(&kafkaCfg.Authentication.SASLConfig.TLSConfig),
 		},
